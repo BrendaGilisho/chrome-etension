@@ -1,0 +1,1 @@
+{"version":3,"file":"contentScript.js","mappings":";;;;;AAAA;AACA;AACA;AACA;AACA","sources":["webpack://chrome_extension/./src/contentScript/contentScript.ts"],"sourcesContent":["// //  attaches to dom -- allows you to render stuff to dom(front end)\n\n// window.onload = () => {\n//     console.log(\"From content script\")\n// }"],"names":[],"sourceRoot":""}

@@ -11,5 +11,18 @@
     "action": {
         "default_title": "Click me",
         "default_popup": "popup.html"
+    },
+    "permissions": [
+        "tabs",
+        "bookmarks",
+        "unlimitedStorage"
+    ],
+    "background": {
+        "service_worker": "background.js"
+      },
+    "content_scripts": [{
+        "matches": ["https://*.google.com/*"],
+        "js": ["contentScript.js"]
     }
+    ]
 }

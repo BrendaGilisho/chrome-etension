@@ -9,7 +9,9 @@ module.exports = {
     mode: "development",
     devtool: 'cheap-module-source-map',
     entry: {
-        popup: path.resolve('./src/popup/popup.tsx')
+        popup: path.resolve('./src/popup/popup.tsx'),
+        background: path.resolve('./src/background/background.ts'),
+        contentScript: path.resolve("./src/contentScript/contentScript.ts")
     },
     module: {
         rules: [
@@ -29,6 +31,10 @@ module.exports = {
                     }
                 }],
                 test: /\.css$/i
+            },
+            {
+                type: 'assets/resource',
+                test: /\.(png|jpg|jpeg|gif|woff|woff2|tff|eot|svg)$/,
             }
         ]
     },
@@ -45,16 +51,29 @@ module.exports = {
              
             ],
           }),
-        new HtmlPlugin({
-            title: 'Price tracker',
-            filename: 'popup.html',
-            chunk: ['popup']
-        })
+          ...getHtmlPlugins([
+            'popup',
+            'background'
+        ])
     ],
     resolve: {
         extensions: ['.tsx', '.ts', '.js']
     },
     output: {
         filename: '[name].js'
+    },
+    optimization: {
+        splitChunks: {
+            chunks: 'all',
+        }
     }
+
 };
+
+function getHtmlPlugins(chunks) {
+    return chunks.map(chunk => new HtmlPlugin({
+        title: 'React Extension',
+        filename: `${chunk}.html`,
+        chunks: [chunk]
+    }))
+}
