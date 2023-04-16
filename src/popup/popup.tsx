@@ -2,7 +2,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client'
 import '../assets/tailwind.css'
-import App from './back';
+import App from './front';
 
 const All = () => {
   return (
